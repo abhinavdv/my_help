@@ -1,0 +1,29 @@
+https://askubuntu.com/questions/1028868/steps-to-add-a-new-resolution-1366x768-60-troubleshooting
+
+
+# create and name a new mode: "1366x768-0"
+xrandr --newmode "1366x768-0" 75.61  1366 1406 1438 1574  768 771 777 800 -hsync -vsync
+
+# attach the new mode to an output (VGA1)
+xrandr --addmode VGA1 "1366x768-0"
+
+# turn on the output using the new mode
+xrandr --output VGA1 --mode "1366x768-0"
+
+
+#For my moniter
+xrandr --newmode "1366x768-0" 60.00  1366 1406 1438 1574  768 771 777 800 -hsync -vsync
+xrandr --addmode HDMI-1 "1366x768-0"
+xrandr --output HDMI-1 --mode "1366x768-0"
+
+
+
+
+#The reason for the error messages in the question is mode parameters cannot be changed. Use a new name (such as "1366x768-1") or remove the added mode. The sequence of commands to remove a mode follow:
+
+# turn off the output
+xrandr --output VGA1 --off
+# detach the mode from the output
+xrandr --delmode VGA1 "1366x768-0"
+# remove the mode
+xrandr --rmmode "1366x768-0"
